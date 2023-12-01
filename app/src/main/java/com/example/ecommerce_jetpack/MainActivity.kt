@@ -40,17 +40,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
-
-
-val retrofit = Retrofit.Builder()
-    .baseUrl("https://fakestoreapi.com/")
-    .addConverterFactory(GsonConverterFactory.create())
-    .build()
-
-val apiService = retrofit.create(ApiService::class.java)
-
-
+val retrofit = ApiServiceBuilder.retrofit
 
 
 @Composable
@@ -117,7 +107,7 @@ fun MainScreen(){
                 .padding(8.dp)
                 .height(120.dp),
             ) {
-            Text(text = "Discover your beauty", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+            Text(text = "Discover your Products", fontSize = 18.sp, fontWeight = FontWeight.Bold)
             Row(modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
@@ -164,7 +154,13 @@ fun MainScreen(){
                             append("Description: ${data.description}\n")
                             append("Image: ${data.image}\n")
                         },
-                        modifier = Modifier.padding(16.dp)
+                        modifier = Modifier
+                            .width(100.dp)
+                            .height(100.dp)
+                            .background(
+                                color = Color.LightGray,
+                                shape = RoundedCornerShape(6.dp)
+                            )
                     )
                 }
             }
